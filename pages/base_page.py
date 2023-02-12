@@ -34,3 +34,6 @@ class NextPage:
 
     def element_not_visible(self, locator, timeout=20):
         return WebDriverWait(self.driver, timeout).until(ec.invisibility_of_element_located(locator))
+
+    def scroll(self):
+        self.driver.execute_script("window.scrollTo(0,1800)")

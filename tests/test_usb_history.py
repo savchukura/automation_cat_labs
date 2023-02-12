@@ -13,9 +13,10 @@ from pages.new_case_page import CreatePage
 from pages.check_result import ResultPage
 from pages.login_page import LoginPage
 from configurate import *
+import os
 
 CASE_NAME = "test usb"
-FILE = "C:/Users/WellDone/PycharmProjects/automation_cat_labs/tests/USBSTOR.reg"
+FILE = os.path.abspath("../tests/USBSTOR.reg"),
 FILE_TWO = "../tests/USBSTOR.reg"
 BROWSER_UPLOAD = 4
 
@@ -32,4 +33,4 @@ class Test_Create_browser_case:
         check_result.check_usb_history_result()
 
         delete_case = DeletePage(driver)
-        delete_case.delete_usb_history_case()
+        delete_case.delete_case()

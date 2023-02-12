@@ -13,10 +13,13 @@ from pages.new_case_page import CreatePage
 from pages.check_result import ResultPage
 from pages.login_page import LoginPage
 from configurate import *
+import os
 
 CASE_NAME = "test browser"
-FILE = "C:/Users/WellDone/PycharmProjects/automation_cat_labs/tests/safari.zip"
+FILE = os.path.abspath("../tests/safari.zip")
 BROWSER_UPLOAD = 1
+
+
 
 class Test_Create_browser_case:
 
@@ -31,9 +34,7 @@ class Test_Create_browser_case:
         check_result.check_browser_result_safari()
 
         delete_case = DeletePage(driver)
-        delete_case.delete_browser_case()
-
-
+        delete_case.delete_case()
 
     def test_identify_browser_file(self, driver):
         browser_service = Service(ChromeDriverManager().install())

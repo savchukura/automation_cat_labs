@@ -13,9 +13,10 @@ from pages.new_case_page import CreatePage
 from pages.check_result import ResultPage
 from pages.login_page import LoginPage
 from configurate import *
+import os
 
 CASE_NAME = "test email"
-FILE = "C:/Users/WellDone/PycharmProjects/automation_cat_labs/tests/ethereum/CAT-00005-GMTMBOX (1).mbox"
+FILE = os.path.abspath("../tests/ethereum/CAT-00005-GMTMBOX (1).mbox")
 IMAGE_UPLOAD = 2
 TABS_IN_CASE = 2
 
@@ -32,4 +33,4 @@ class Test_Create_email_case:
         check_result.check_email_domain_result_safari()
 
         delete_case = DeletePage(driver)
-        delete_case.delete_email_case()
+        delete_case.delete_case()

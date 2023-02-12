@@ -32,7 +32,7 @@ PART_ETH_IMAGE_UPLOUD = 7
 QR_ETH_IMAGE_UPLOUD = 8
 TABS_IN_CASE = 0
 
-class Test_Create_image_case:
+class Test_Create_image_case():
 
     def test_identify_image_file_matic_valid_screen(self, driver):
         login = LoginPage(driver, URL)
@@ -45,7 +45,7 @@ class Test_Create_image_case:
         check_image_result.check_image_result_with_seed_phrase(TABS_IN_CASE)
 
         delete_usb_case = DeletePage(driver)
-        delete_usb_case.delete_images_case()
+        delete_usb_case.delete_case()
 
     def test_identify_image_file_ethereum_valid_screen(self, driver):
         login = LoginPage(driver, URL)
@@ -55,10 +55,10 @@ class Test_Create_image_case:
         new_case.create_case(CASE_NAME[1], FILE[1], FULL_ETH_IMAGE_UPLOUD)
 
         check_result = ResultPage(driver)
-        check_result.check_result_with_eth_seed_phrase(TABS_IN_CASE, 10)
+        check_result.check_result_with_eth_seed_phrase(0, 10, ' Images')
 
         delete_case = DeletePage(driver)
-        delete_case.delete_case(0)
+        delete_case.delete_case()
 
     def test_identify_image_file_with_part_phrase_ethereum_valid_screen(self, driver):
         login = LoginPage(driver, URL)
@@ -68,10 +68,10 @@ class Test_Create_image_case:
         new_case.create_case(CASE_NAME[2], FILE[2], PART_ETH_IMAGE_UPLOUD)
 
         check_result = ResultPage(driver)
-        check_result.check_result_with_eth_seed_phrase(TABS_IN_CASE, 25)
+        check_result.check_result_with_eth_seed_phrase(0, 25, ' Images')
 
         delete_case = DeletePage(driver)
-        delete_case.delete_case(0)
+        delete_case.delete_case()
 
     def test_identify_qr_image_file_with_wallet_address_ethereum_valid_screen(self, driver):
         login = LoginPage(driver, URL)
@@ -81,10 +81,9 @@ class Test_Create_image_case:
         new_case.create_case(CASE_NAME[3], FILE[3], QR_ETH_IMAGE_UPLOUD)
 
         check_result = ResultPage(driver)
-        check_result.check_eth_wallet_address(TABS_IN_CASE, 16)
+        check_result.check_eth_wallet_address(0, 16, " Images")
 
         delete_case = DeletePage(driver)
-        delete_case.delete_case(0)
-
+        delete_case.delete_case()
 
 

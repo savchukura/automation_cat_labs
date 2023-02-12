@@ -18,7 +18,29 @@ class MainPageLocators():
                        (By.XPATH, '//*[text() = "test application"]'),
                        (By.XPATH, '//*[text() = "test_image_eth_full"]'),
                        (By.XPATH, '//*[text() = "test_image_eth_part"]'),
-                       (By.XPATH, '//*[text() = "test_qr_eth_wallet"]')]
+                       (By.XPATH, '//*[text() = "test_qr_eth_wallet"]'),
+                       (By.XPATH, '//*[text() = "test_seed_eth_txt_doc"]'),
+                       (By.XPATH, '//*[text() = "test_seed_eth_docx_doc"]'),
+                       (By.XPATH, '//*[text() = "test_seed_eth_odt_doc"]'),
+                       (By.XPATH, '//*[text() = "test_seed_eth_xlsx_doc"]'),
+
+                       (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_txt"]'),
+                       (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_docx"]'),
+                       (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_odt"]'),
+                       (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_xlsx"]')]
+
+    UPLOAD_COMPLETE_IMAGE = [(By.XPATH, '//*[text() = "test image"]')]
+    UPLOAD_COMPLETE_BROWSER = [(By.XPATH, '//*[text() = "test browser"]')]
+    UPLOAD_COMPLETE_EMAILS = [(By.XPATH, '//*[text() = "test email"]')]
+
+    UPLOAD_COMPLETE_DOCUMENT = [(By.XPATH, '//*[text() = "test document"]'),
+                                (By.XPATH, '//*[text() = "test_seed_eth_txt_doc"]'),
+                                (By.XPATH, '//*[text() = "test_seed_eth_docx_doc"]')]
+
+    UPLOAD_COMPLETE_USB = [(By.XPATH, '//*[text() = "test usb"]')]
+    UPLOAD_COMPLETE_APP = [(By.XPATH, '//*[text() = "test application"]')]
+
+
 
     START_BUTTON = (By.ID, "case_card_start_btn")
     OPEN_BUTTON = (By.ID, "case_card_open_btn")
@@ -36,27 +58,28 @@ class MainPageLocators():
                     (By.ID, "card_detail_tabs_App"),
                     (By.ID, "card_detail_tabs_All Traces")]
 
-
-
+    CASE_RESULTS = (By.XPATH, "//div[@class='style_wrap__6TU-e style_infoRow__zvGUv']")
     RESULTS_FIELDS = (By.XPATH, "//div[@class='style_card__HaMfE']")
 
     PAGINATION_PREV = (By.XPATH, "//li[@class='style_item__f8jL1 style_prevArrow__i8XDY']")
     PAGINATION_NEXT = (By.XPATH, "//li[@class='style_item__f8jL1 style_nextArrow__I9OMr']")
 
-    RESULT = (By.XPATH, "//a[@class='MuiBox-root css-kxoxyh']")
+    #RESULT = (By.XPATH, "//a[@class='MuiBox-root css-kxoxyh']")
     # seed phrase and wallet address
     PURSE_WALLET_BUTTON = (By.ID, "trace_detail_action_btn")
     SAVE_PDF_BUTTON = (By.ID, "trace_detail_save_PDF_btn")
-    FETCH_UPDATES_BUTTON = (By.XPATH, "//button[@class='MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1bj54f1']")
-    RESULT_SCANING_SEED = (By.XPATH, "//p[@class='MuiTypography-root MuiTypography-body1 css-16q5o7z']")
-    RESULT_SCANING = (By.XPATH, "//p[@class='MuiTypography-root MuiTypography-body1 css-14wd27g']")
-    RESULT_SCANING_ASSETS = (By.XPATH, "//div[@class='MuiBox-root css-1821gv5']")
+    FETCH_UPDATES_BUTTON = (By.ID, "trace_detail_fetch_updates_btn")
+    #RESULT_SCANING_SEED = (By.XPATH, "//p[@class='MuiTypography-root MuiTypography-body1 css-16q5o7z']")
+    RESULT_SCANING = (By.XPATH, "//div[@class='style_wrap__6TU-e style_column__Wegf8']")
+    RESULT_SCANING_ASSETS = (By.XPATH, "//div[@class='style_assetsWraper__POolV']")
 
     # usb results
-    USB_RESULTS = (By.XPATH, "//div[@class='MuiBox-root css-yd8sa2']")
+    USB_RESULTS = (By.XPATH, "//div[@class='style_wrap__6TU-e style_column__Wegf8']")
     USB_RESULTS_TEST = (By.XPATH, "//p[@class='MuiTypography-root MuiTypography-h5 css-hi4jmm']")
 
     #browser, emails domains results
-    DOMAINS = (By.XPATH, "//div[@class='MuiBox-root css-1j8l0ob']")
+    HISTORY_DOMAINS = (By.XPATH, "//div[@class='style_domainsWrap__fcuAe style_history_domains__swXc7']")
+    EMAIL_DOMAINS = (By.XPATH, "//div[@class='style_domainsWrap__fcuAe style_email_domains__t43M-']")
+    APPLICATION_DOMAINS = (By.XPATH, "//div[@class='style_domainsWrap__fcuAe style_applications__xoZEd']")
 
 
