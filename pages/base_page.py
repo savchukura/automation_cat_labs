@@ -17,9 +17,21 @@ class BasePage:
     def elements_are_visible(self, locator, timeout=20):
         return WebDriverWait(self.driver, timeout).until(ec.visibility_of_all_elements_located(locator))
 
+    def element_is_present(self, locator, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(ec.presence_of_element_located(locator))
+
+    def elements_are_present(self, locator, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(ec.presence_of_all_elements_located(locator))
+
     def element_not_visible(self, locator, timeout=20):
         return WebDriverWait(self.driver, timeout).until(ec.invisibility_of_element_located(locator))
 
+    def element_is_clickable(self, locator, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(ec.element_to_be_clickable(locator))
+
+    def go_to_element(self, element):
+        self.driver.execute_script("argument[0].scrollIntoView();", element)
+        
 
 class NextPage:
 
@@ -32,8 +44,20 @@ class NextPage:
     def elements_are_visible(self, locator, timeout=20):
         return WebDriverWait(self.driver, timeout).until(ec.visibility_of_all_elements_located(locator))
 
+    def element_is_present(self, locator, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(ec.presence_of_element_located(locator))
+
+    def elements_are_present(self, locator, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(ec.presence_of_all_elements_located(locator))
+
     def element_not_visible(self, locator, timeout=20):
         return WebDriverWait(self.driver, timeout).until(ec.invisibility_of_element_located(locator))
+
+    def element_is_clickable(self, locator, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(ec.element_to_be_clickable(locator))
+
+    def go_to_element(self, element):
+        self.driver.execute_script("argument[0].scrollIntoView();", element)
 
     def scroll(self):
         self.driver.execute_script("window.scrollTo(0,1800)")

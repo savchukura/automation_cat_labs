@@ -23,11 +23,12 @@ class MainPageLocators():
                        (By.XPATH, '//*[text() = "test_seed_eth_docx_doc"]'),
                        (By.XPATH, '//*[text() = "test_seed_eth_odt_doc"]'),
                        (By.XPATH, '//*[text() = "test_seed_eth_xlsx_doc"]'),
-
                        (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_txt"]'),
                        (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_docx"]'),
                        (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_odt"]'),
-                       (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_xlsx"]')]
+                       (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_xlsx"]'),
+                       (By.XPATH, '//*[text() = "test_seed_eth_application"]'),
+                       (By.XPATH, '//*[text() = "test_wallet_adr_bit_doc_txt"]')]
 
     UPLOAD_COMPLETE_IMAGE = [(By.XPATH, '//*[text() = "test image"]')]
     UPLOAD_COMPLETE_BROWSER = [(By.XPATH, '//*[text() = "test browser"]')]
