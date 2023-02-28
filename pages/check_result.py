@@ -1,7 +1,7 @@
 import time
 
 from selenium.common import NoSuchElementException
-
+from selenium.common.exceptions import TimeoutException
 from pages.base_page import NextPage
 from locators.Main_Page import MainPageLocators as locators
 
@@ -9,7 +9,7 @@ from locators.Main_Page import MainPageLocators as locators
 
 class ResultPage(NextPage):
 
-    def open_wallet_address_case(self, tabs_in_case, time_sleep_before_purse):
+    def open_wallet_address_case(self, tabs_in_case, time_sleep_before_purse=0):
         time.sleep(1)
         self.element_is_visible(locators.TABS_IN_CASE[tabs_in_case]).click()
         self.scroll()
@@ -17,6 +17,13 @@ class ResultPage(NextPage):
         self.element_is_visible(locators.PURSE_WALLET_BUTTON).click()
         time.sleep(time_sleep_before_purse)
         self.element_is_visible(locators.FETCH_UPDATES_BUTTON).click()
+        time.sleep(0.5)
+
+    def open_domain_case(self, tabs_in_case):
+        time.sleep(1)
+        self.element_is_visible(locators.TABS_IN_CASE[tabs_in_case]).click()
+        self.scroll()
+        self.element_is_visible(locators.RESULTS_FIELDS).click()
         time.sleep(0.5)
 
     def check_result_wallet_address(self):
@@ -37,6 +44,11 @@ class ResultPage(NextPage):
         assets = self.element_is_visible(locators.RESULT_SCANING_ASSETS).text
 
         return seed_phrase, private_key, wallet_address, public_key, balance, assets
+
+    def check_application_domains(self):
+        domains = self.element_is_visible(locators.APPLICATION_DOMAINS).text
+
+        return domains
 
     def check_browser_result_safari(self):
         time.sleep(1)

@@ -16,11 +16,15 @@ from configurate import *
 import os
 
 CASE_NAME = ["test application",
-             "test_seed_eth_application"]
-FILE = [os.path.abspath("../tests/safari.zip"),
-        os.path.abspath("../tests/files/Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe.zip")]
+             "test_seed_eth_application",
+             "test_dmg_file"]
 
-APPLICATION_UPLOAD = [5, 17]
+
+FILE = [os.path.abspath("../tests/safari.zip"),
+        os.path.abspath("../tests/files/Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe.zip"),
+        os.path.abspath("../tests/files/exodus-macos-arm64-22.12.5.dmg")]
+
+APPLICATION_UPLOAD = [5, 17, 19]
 
 
 class Test_Create_application_case():
@@ -48,6 +52,23 @@ class Test_Create_application_case():
                            '0.00 USD')
         assert assets == ('Assets:\n'
                           '0.000000000000032000 ETH')
+
+        delete_case = DeletePage(driver)
+        delete_case.delete_case()
+
+    def test_dmg_file(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+
+        new_case = CreatePage(driver)
+        new_case.create_case(CASE_NAME[2], FILE[2], APPLICATION_UPLOAD[2])
+
+        check_result = ResultPage(driver)
+        check_result.open_domain_case(5)
+
+        application_domains = check_result.check_application_domains()
+
+        assert application_domains == "exodus-macos-arm64-22.12.5.dmg"
 
         delete_case = DeletePage(driver)
         delete_case.delete_case()
