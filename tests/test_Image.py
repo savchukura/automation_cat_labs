@@ -97,7 +97,7 @@ class Test_Create_image_case():
         new_case.create_case(CASE_NAME[2], FILE[2], PART_ETH_IMAGE_UPLOUD)
 
         check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(0, 70)
+        check_result.open_wallet_address_case(0, 80)
 
         seed_phrase, private_key, wallet_address, public_key, balance, assets = check_result.check_result_seed_phrase()
         assert seed_phrase == ('Seed Phrase | Images\n'

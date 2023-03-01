@@ -20,7 +20,7 @@ FILE = os.path.abspath("../tests/USBSTOR.reg"),
 FILE_TWO = "../tests/USBSTOR.reg"
 BROWSER_UPLOAD = 4
 
-class Test_Create_browser_case:
+class Test_USB_case:
 
     def test_identify_usb_file(self, driver):
         login = LoginPage(driver, URL)

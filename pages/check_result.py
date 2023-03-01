@@ -17,7 +17,7 @@ class ResultPage(NextPage):
         self.element_is_visible(locators.PURSE_WALLET_BUTTON).click()
         time.sleep(time_sleep_before_purse)
         self.element_is_visible(locators.FETCH_UPDATES_BUTTON).click()
-        time.sleep(0.5)
+        time.sleep(1)
 
     def open_domain_case(self, tabs_in_case):
         time.sleep(1)
