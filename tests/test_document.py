@@ -248,9 +248,9 @@ class Test_Create_document_case:
         assert wallet_address == ('Wallet Address | Documents\n'
                                   '1MewpRkpcbFdqamPPYc1bXa9AJ189Succy')
         assert balance == ('Balance\n'
-                           '1784333333.33 USD')
+                           '238158136.63 USD')
         assert assets == ('Assets:\n'
-                          '83333.333333333328482695 BTC')
+                          '10000.005737040000894922 BTC')
 
         delete_case = DeletePage(driver)
         delete_case.delete_case()

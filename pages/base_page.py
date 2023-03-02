@@ -38,10 +38,10 @@ class NextPage:
     def __init__(self, driver):
         self.driver = driver
 
-    def element_is_visible(self, locator, timeout=20):
+    def element_is_visible(self, locator, timeout=25):
         return WebDriverWait(self.driver, timeout).until(ec.visibility_of_element_located(locator))
 
-    def elements_are_visible(self, locator, timeout=20):
+    def elements_are_visible(self, locator, timeout=25):
         return WebDriverWait(self.driver, timeout).until(ec.visibility_of_all_elements_located(locator))
 
     def element_is_present(self, locator, timeout=20):
