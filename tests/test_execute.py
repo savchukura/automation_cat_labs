@@ -4,6 +4,7 @@ from test_document import *
 from test_emails import *
 from test_Image import *
 from test_usb_history import *
+from test_dash_board import *
 
 
 class EthereumTest:

@@ -30,7 +30,9 @@ class MainPageLocators():
                        (By.XPATH, '//*[text() = "test_wallet_adr_eth_doc_xlsx"]'),  # 16
                        (By.XPATH, '//*[text() = "test_seed_eth_application"]'),  # 17
                        (By.XPATH, '//*[text() = "test_wallet_adr_bit_doc_txt"]'),  # 18
-                       (By.XPATH, '//*[text() = "test_dmg_file"]')]  # 19
+                       (By.XPATH, '//*[text() = "test_dmg_file"]'),  # 19
+                       (By.XPATH, '//*[text() = "test_dashboard_bitcoin_doc"]'),  # 20
+                       (By.XPATH, '//*[text() = "test_dashboard_browser_arch"]')]  # 21
 
     UPLOAD_COMPLETE_IMAGE = [(By.XPATH, '//*[text() = "test image"]')]
     UPLOAD_COMPLETE_BROWSER = [(By.XPATH, '//*[text() = "test browser"]')]
@@ -51,6 +53,10 @@ class MainPageLocators():
     # Results
 
     START_SEARCH_BUTTON = (By.ID, "accordion_card_start_search_btn")
+
+    DASHBOARD_RESULT = (By.XPATH, "//p[@class='subtitle style_desc__tSskh']")
+    CASE_RESULT = (By.XPATH, "//p[@class='small-text style_desc__tSskh']")
+
     TABS_IN_CASE = [(By.ID, "card_detail_tabs_Images"),
                     (By.ID, "card_detail_tabs_Browsers"),
                     (By.ID, "card_detail_tabs_Emails"),
@@ -64,6 +70,11 @@ class MainPageLocators():
 
     PAGINATION_PREV = (By.XPATH, "//li[@class='style_item__f8jL1 style_prevArrow__i8XDY']")
     PAGINATION_NEXT = (By.XPATH, "//li[@class='style_item__f8jL1 style_nextArrow__I9OMr']")
+
+    # Navigation buttons in case
+    MAIN_BUTTON = (By.ID, "breadcrumbs-Main")
+    CASE_BUTTON = (By.ID, "breadcrumbs-Case")
+
 
     # RESULT = (By.XPATH, "//a[@class='MuiBox-root css-kxoxyh']")
     # seed phrase and wallet address

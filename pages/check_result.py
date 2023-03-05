@@ -127,3 +127,32 @@ class ResultPage(NextPage):
                                        '*')
         assert usb_history[4].text == ('Device Description\n'
                                        'Bitcoin Wallet')
+
+    def go_from_case_to_dashboard(self):
+        self.element_is_visible(locators.CASE_BUTTON).click()
+        self.refresh_page()
+
+    def get_data_from_wallet_scan(self):
+        time.sleep(1)
+        another_result = self.elements_are_visible(locators.CASE_RESULT)
+
+        balance = another_result[0].text.split(' ')[0]
+
+        return balance
+
+    def check_dashboard(self):
+        dashboard_result = self.elements_are_visible(locators.DASHBOARD_RESULT)
+        files = dashboard_result[0].text
+        traces = dashboard_result[1].text
+        seed_phrase = dashboard_result[2].text
+        wallet_addresses = dashboard_result[3].text
+        app = dashboard_result[4].text
+        domains = dashboard_result[5].text
+        usb_devices = dashboard_result[6].text
+        last_update = dashboard_result[7].text
+        case_created = dashboard_result[8].text
+        balance_in_usd = dashboard_result[9].text.split(' ')[1]
+        witness = dashboard_result[10].text
+        executor = dashboard_result[11].text
+
+        return files, traces, seed_phrase, wallet_addresses, app, domains, usb_devices, last_update, case_created, balance_in_usd, witness, executor

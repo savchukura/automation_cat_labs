@@ -61,3 +61,6 @@ class NextPage:
 
     def scroll(self):
         self.driver.execute_script("window.scrollTo(0,1800)")
+
+    def refresh_page(self):
+        self.driver.refresh()
