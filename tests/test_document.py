@@ -1,256 +1,330 @@
-from selenium import webdriver
 import time
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from locators.Main_Page import MainPageLocators as locators
+
 from URL.url import *
 from pages.delete_page import DeletePage
 from pages.new_case_page import CreatePage
 from pages.check_result import ResultPage
 from pages.login_page import LoginPage
+from pages.email_page import GetWitnessCode
+from pages.open_case import OpenCase
 from configurate import *
 import os
 
-CASE_NAME = ["test document",
-             "test_seed_eth_txt_doc",
-             "test_seed_eth_docx_doc",
-             "test_seed_eth_odt_doc",
-             "test_seed_eth_xlsx_doc",
 
-             "test_wallet_adr_eth_doc_txt",
-             "test_wallet_adr_eth_doc_docx",
-             "test_wallet_adr_eth_doc_odt",
-             "test_wallet_adr_eth_doc_xlsx",
-             "test_wallet_adr_bit_doc_txt"]
 FILE = [os.path.abspath("../tests/text_doc.txt"),
         os.path.abspath("../tests/files/seed_with_full_phrase.txt"),
         os.path.abspath("../tests/files/seed_phrase_eth.docx"),
         os.path.abspath("../tests/files/seed_phrase_eth.odt"),
+        os.path.abspath("../tests/files/seed_phrase_eth.pdf"),
+        os.path.abspath("../tests/files/seed_phrase_eth.doc"),
+        os.path.abspath("../tests/files/seed_phrase_eth.ppt"),
+        os.path.abspath("../tests/files/seed_phrase_eth.xls"),
         os.path.abspath("../tests/files/seed_phrase_eth.xlsx"),
 
-        os.path.abspath("../tests/files/wallet_address_eth.txt"),
         os.path.abspath("../tests/files/wallet_address_eth.docx"),
         os.path.abspath("../tests/files/wallet_address_eth.odt"),
+        os.path.abspath("../tests/files/wallet_address_eth.txt"),
         os.path.abspath("../tests/files/wallet_address_eth.xlsx"),
+
         os.path.abspath("../tests/files/bitcoin_wallet_with_balance.txt"), ]
-DOCUMENT_UPLOAD = [3, 9, 10, 11, 12, 13, 14, 15, 16, 18]
 
 
-class Test_Create_document_case:
+class TestCreateDocumentCase:
 
-    def test_identify_full_seed_phrase_ethereum_document_file_txt_valid(self, driver):
+    def test_create_doc_case_full_seed_txt(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[1], FILE[1], DOCUMENT_UPLOAD[1])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc txt', "101", FILE[1])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc txt', "101")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 10)
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        seed_phrase, private_key, wallet_address, public_key, balance, assets = check_result.check_result_seed_phrase()
-        assert seed_phrase == ('Seed Phrase | Documents\n'
-                               'slab wise seat vague tennis section black scare father inmate ostrich follow')
-        assert private_key == ('Private Key\n'
-                               'e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a')
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert public_key == ('Public Key\n'
-                              '03625a51b1447fd8b1e85a3898725a4bd08986e833501cd3f92cf8a29389f45466')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_full_seed_phrase_ethereum_document_file_docx_valid(self, driver):
+    def test_create_doc_case_full_seed_docx(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[2], FILE[2], DOCUMENT_UPLOAD[2])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc docx', "102", FILE[2])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc docx', "102")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 10)
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        seed_phrase, private_key, wallet_address, public_key, balance, assets = check_result.check_result_seed_phrase()
-        assert seed_phrase == ('Seed Phrase | Documents\n'
-                               'slab wise seat vague tennis section black scare father inmate ostrich follow')
-        assert private_key == ('Private Key\n'
-                               'e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a')
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert public_key == ('Public Key\n'
-                              '03625a51b1447fd8b1e85a3898725a4bd08986e833501cd3f92cf8a29389f45466')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_full_seed_phrase_ethereum_document_file_odt_valid(self, driver):
+    def test_create_doc_case_full_seed_odt(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[3], FILE[3], DOCUMENT_UPLOAD[3])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc odt', "103", FILE[3])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc odt', "103")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 10)
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        seed_phrase, private_key, wallet_address, public_key, balance, assets = check_result.check_result_seed_phrase()
-        assert seed_phrase == ('Seed Phrase | Documents\n'
-                               'slab wise seat vague tennis section black scare father inmate ostrich follow')
-        assert private_key == ('Private Key\n'
-                               'e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a')
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert public_key == ('Public Key\n'
-                              '03625a51b1447fd8b1e85a3898725a4bd08986e833501cd3f92cf8a29389f45466')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_full_seed_phrase_ethereum_document_file_xlsx_valid(self, driver):
+    def test_create_doc_case_full_seed_pdf(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[4], FILE[4], DOCUMENT_UPLOAD[4])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc pdf', "104", FILE[4])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc pdf', "104")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 10)
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        seed_phrase, private_key, wallet_address, public_key, balance, assets = check_result.check_result_seed_phrase()
-        assert seed_phrase == ('Seed Phrase | Documents\n'
-                               'slab wise seat vague tennis section black scare father inmate ostrich follow')
-        assert private_key == ('Private Key\n'
-                               'e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a')
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert public_key == ('Public Key\n'
-                              '03625a51b1447fd8b1e85a3898725a4bd08986e833501cd3f92cf8a29389f45466')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_wallet_address_ethereum_document_file_txt_valid(self, driver):
+    def test_create_doc_case_full_seed_doc(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[5], FILE[5], DOCUMENT_UPLOAD[5])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .doc', "105", FILE[5])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .doc', "105")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 13)
-        assets, wallet_address, balance = check_result.check_result_wallet_address()
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_wallet_address_ethereum_document_file_docx_valid(self, driver):
+    def test_create_doc_case_full_seed_ppt(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[6], FILE[6], DOCUMENT_UPLOAD[6])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .ppt', "106", FILE[6])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .ppt', "106")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 13)
-        assets, wallet_address, balance = check_result.check_result_wallet_address()
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_wallet_address_ethereum_document_file_odt_valid(self, driver):
+    def test_create_doc_case_full_seed_xls(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[7], FILE[7], DOCUMENT_UPLOAD[7])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .xls', "107", FILE[7])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .xls', "107")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 13)
-        assets, wallet_address, balance = check_result.check_result_wallet_address()
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_identify_wallet_address_ethereum_document_file_xlsx_valid(self, driver):
+    def test_create_doc_case_full_seed_xlsx(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[8], FILE[8], DOCUMENT_UPLOAD[8])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .xlsx', "108", FILE[8])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .xlsx', "108")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 13)
-        assets, wallet_address, balance = check_result.check_result_wallet_address()
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '0x1c805E92F3542794d701fA7134Afe34b08a895c2')
-        assert balance == ('Balance\n'
-                           '0.00 USD')
-        assert assets == ('Assets:\n'
-                          '0.000000000000032000 ETH')
+        delete = DeletePage(driver)
+        delete.delete_case()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
-
-    def test_check_bitcoin_wallet_address(self, driver):
+    def test_create_doc_case_wallet_address_docx(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME[9], FILE[9], DOCUMENT_UPLOAD[9])
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('wallet address doc .docx', "109", FILE[9])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('wallet address doc .docx', "109")
 
-        check_result = ResultPage(driver)
-        check_result.open_wallet_address_case(3, 10)
-        assets, wallet_address, balance = check_result.check_result_wallet_address()
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(3)
+        time.sleep(15)
+        wallet_address, balance, assets = open_case.check_parse_result_wallet_address()
 
-        assert wallet_address == ('Wallet Address | Documents\n'
-                                  '1MewpRkpcbFdqamPPYc1bXa9AJ189Succy')
-        assert balance == ('Balance\n'
-                           '238158136.63 USD')
-        assert assets == ('Assets:\n'
-                          '10000.005737040000894922 BTC')
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_create_doc_case_wallet_address_odt(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('wallet address doc .odt', "110", FILE[10])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('wallet address doc .odt', "110")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(3)
+        time.sleep(15)
+        wallet_address, balance, assets = open_case.check_parse_result_wallet_address()
+
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_create_doc_case_wallet_address_txt(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('wallet address doc .txt', "111", FILE[11])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('wallet address doc .txt', "111")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(3)
+        time.sleep(15)
+        wallet_address, balance, assets = open_case.check_parse_result_wallet_address()
+
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_create_doc_case_wallet_address_xlsx(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('wallet address doc .xlsx', "112", FILE[12])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('wallet address doc .xlsx', "112")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(3)
+        time.sleep(15)
+        wallet_address, balance, assets = open_case.check_parse_result_wallet_address()
+
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+

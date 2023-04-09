@@ -64,3 +64,12 @@ class NextPage:
 
     def refresh_page(self):
         self.driver.refresh()
+
+    def open_mail_page(self):
+        self.driver.execute_script("window.open('https://accounts.ukr.net/login','_blank');")
+
+    def switch_to_another_window(self, window_number):
+        self.driver.switch_to.window(self.driver.window_handles[window_number])
+
+    def click_on_element(self, element):
+        self.driver.execute_script("arguments[0].click();", element)
