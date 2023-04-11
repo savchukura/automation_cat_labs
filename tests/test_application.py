@@ -25,9 +25,9 @@ class TestCreateApplicationCase:
 
         create_case = CreatePage(driver)
         create_case.open_case_from_main_page()
-        create_case.create_exhibit('full seed ETH doc txt', "101", FILE[1])
+        create_case.create_exhibit('full seed ETH application', "101", FILE[1])
         create_case.add_witness()
-        create_case.create_case_find_crypto('full seed ETH doc txt', "101")
+        create_case.create_case_find_crypto('full seed ETH application', "101")
 
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()

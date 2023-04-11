@@ -56,3 +56,10 @@ class NewCasePageLocators:
 
     # who created
     ANALYST_AND_SUP = (By.XPATH, "//p[@class='style_info__kVVxz h3']")
+
+    # Disabled buttons
+
+    DIS_FIND_CRYPTO = (
+        By.XPATH, "//button[@class='style_btn__hsBKJ style_primary__puVxW style_btn__8TGvf style_disable__TOkYo']")
+    DIS_SAVE_CASE = (
+        By.XPATH, "//button[@class='style_btn__hsBKJ style_primary__puVxW style_btnSaveCase__WQ8sR style_disable__TOkYo']")

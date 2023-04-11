@@ -45,6 +45,6 @@ class OpenCase(NextPage):
 
         return wallet_address, balance, assets
 
-
-
-
+    def check_presents_of_domains(self):
+        self.elements_are_visible(case_locators.ARTIFACTS_SOURCE_BUTTONS)[4].click()
+        self.go_to_element("//div[@title='http://otnolatrnup.com/hideref.engine?d=https%3a%2f%2fbinomo.com%3fa%3dc565278f3597%26ac%3d101_Q42022']")

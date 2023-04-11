@@ -25,6 +25,9 @@ FILE = [os.path.abspath("../tests/text_doc.txt"),
         os.path.abspath("../tests/files/wallet_address_eth.odt"),
         os.path.abspath("../tests/files/wallet_address_eth.txt"),
         os.path.abspath("../tests/files/wallet_address_eth.xlsx"),
+        os.path.abspath("../tests/files/seed_phrase_eth.ods"),
+        os.path.abspath("../tests/files/seed_phrase_eth.html"),
+        os.path.abspath("../tests/files/seed_phrase_eth.rtf"),
 
         os.path.abspath("../tests/files/bitcoin_wallet_with_balance.txt"), ]
 
@@ -156,31 +159,6 @@ class TestCreateDocumentCase:
         delete = DeletePage(driver)
         delete.delete_case()
 
-    def test_create_doc_case_full_seed_ppt(self, driver):
-        login = LoginPage(driver, URL)
-        login.open()
-        login.log_in("yura+i@catlabs.io", "12345678")
-
-        create_case = CreatePage(driver)
-        create_case.open_case_from_main_page()
-        create_case.create_exhibit('full seed ETH doc .ppt', "106", FILE[6])
-        create_case.add_witness()
-        create_case.create_case_find_crypto('full seed ETH doc .ppt', "106")
-
-        open_case = OpenCase(driver)
-        open_case.open_case_with_witness()
-        open_case.open_artifact(0)
-        time.sleep(15)
-        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
-        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
-        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
-        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
-        assert balance == "0.00 USD Value"
-        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
-
-        delete = DeletePage(driver)
-        delete.delete_case()
-
     def test_create_doc_case_full_seed_xls(self, driver):
         login = LoginPage(driver, URL)
         login.open()
@@ -216,6 +194,81 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .xlsx', "108", FILE[8])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .xlsx', "108")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_create_doc_case_full_seed_ods(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .ods', "113", FILE[13])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .ods', "113")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_create_doc_case_full_seed_html(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .html', "114", FILE[14])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .html', "114")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact(0)
+        time.sleep(15)
+        seed_phrase, wallet_address, private_key, balance, assets = open_case.check_parse_result_seed()
+        assert seed_phrase == "slab wise seat vague tennis section black scare father inmate ostrich follow"
+        assert wallet_address == "0x1c805E92F3542794d701fA7134Afe34b08a895c2"
+        assert private_key == "e4d67889177aa11c4c0d5c3574166c21d72876842832c871a5fb39e23b4d2f3a"
+        assert balance == "0.00 USD Value"
+        assert assets == "0.000000000000032000 ETH" or '0.0 ETH'
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_create_doc_case_full_seed_rtf(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH doc .rtf', "115", FILE[15])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('full seed ETH doc .rtf', "115")
 
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()

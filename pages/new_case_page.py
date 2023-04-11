@@ -52,4 +52,10 @@ class CreatePage(NextPage):
 
         return analyst, supervisor
 
+    def return_disable_find_crypto_and_save_case_buttons(self):
+        dis_find_crypto = self.element_is_visible(new_case_locators.DIS_FIND_CRYPTO)
+        dis_save_case = self.element_is_visible(new_case_locators.DIS_SAVE_CASE)
+        return dis_find_crypto, dis_save_case
+
+
 

@@ -1,17 +1,12 @@
-from selenium import webdriver
 import time
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from locators.Main_Page import MainPageLocators as locators
+
 from URL.url import *
 from pages.delete_page import DeletePage
 from pages.new_case_page import CreatePage
 from pages.check_result import ResultPage
 from pages.login_page import LoginPage
+from pages.email_page import GetWitnessCode
+from pages.open_case import OpenCase
 from configurate import *
 import os
 
@@ -20,17 +15,22 @@ FILE = os.path.abspath("../tests/safari.zip")
 BROWSER_UPLOAD = 1
 
 
-class Test_Create_browser_case:
+class TestCreateBrowserCase:
 
     def test_identify_browser_file_safari_valid(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME, FILE, BROWSER_UPLOAD)
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('Safari Domains', "101", FILE)
+        time.sleep(50)
+        create_case.add_witness()
+        create_case.create_case_find_crypto('Safari Domains', "101")
 
-        check_result = ResultPage(driver)
-        check_result.check_browser_result_safari()
+        open_case = OpenCase(driver)
+        open_case.check_presents_of_domains()
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
+        delete = DeletePage(driver)
+        delete.delete_case()
