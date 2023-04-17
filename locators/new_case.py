@@ -28,6 +28,10 @@ class NewCasePageLocators:
     CASE_NUMBER_INPUT = (By.ID, "case_create_number")
 
     # EXHIBIT
+
+    # EXHIBITS ON DASHBOARD
+    EXHIBIT_INFORMATION_DASH = (By.XPATH, "//div[@class='style_column__wMKeM style_alignCenter__gpYHv']")
+
     # EXHIBIT INPUTS
     DESCRIPTION_INPUT = (By.ID, "case_exhibits_description")
     EXHIBIT_ID_INPUT = (By.ID, "case_exhibits_id")

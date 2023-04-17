@@ -44,7 +44,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc txt', "101", FILE[1])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc txt', "101")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -69,7 +69,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc docx', "102", FILE[2])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc docx', "102")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -94,7 +94,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc odt', "103", FILE[3])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc odt', "103")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -119,7 +119,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc pdf', "104", FILE[4])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc pdf', "104")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -144,7 +144,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .doc', "105", FILE[5])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .doc', "105")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -169,7 +169,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .xls', "107", FILE[7])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .xls', "107")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -194,7 +194,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .xlsx', "108", FILE[8])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .xlsx', "108")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -219,7 +219,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .ods', "113", FILE[13])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .ods', "113")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -244,7 +244,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .html', "114", FILE[14])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .html', "114")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -269,7 +269,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('full seed ETH doc .rtf', "115", FILE[15])
         create_case.add_witness()
         create_case.create_case_find_crypto('full seed ETH doc .rtf', "115")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(0)
@@ -294,7 +294,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('wallet address doc .docx', "109", FILE[9])
         create_case.add_witness()
         create_case.create_case_find_crypto('wallet address doc .docx', "109")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(3)
@@ -318,7 +318,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('wallet address doc .odt', "110", FILE[10])
         create_case.add_witness()
         create_case.create_case_find_crypto('wallet address doc .odt', "110")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(3)
@@ -342,7 +342,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('wallet address doc .txt', "111", FILE[11])
         create_case.add_witness()
         create_case.create_case_find_crypto('wallet address doc .txt', "111")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(3)
@@ -366,7 +366,7 @@ class TestCreateDocumentCase:
         create_case.create_exhibit('wallet address doc .xlsx', "112", FILE[12])
         create_case.add_witness()
         create_case.create_case_find_crypto('wallet address doc .xlsx', "112")
-
+        time.sleep(10)
         open_case = OpenCase(driver)
         open_case.open_case_with_witness()
         open_case.open_artifact(3)

@@ -29,3 +29,6 @@ class Alert(NextPage):
     def enter_pin_and_open_case(self, pin='424242'):
         self.element_is_visible(AlertLocator.PIN_INPUT).send_keys(pin)
         self.element_is_visible(AlertLocator.OPEN_CASE_WITNESS_BUTTON).click()
+
+    def refresh_page(self):
+        self.driver.refresh()

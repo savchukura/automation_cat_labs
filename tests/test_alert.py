@@ -160,3 +160,86 @@ class TestAlert:
         delete = DeletePage(driver)
         delete.delete_case()
 
+    def test_case_updated_alert(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH', "101", FILE[0])
+        create_case.add_witness()
+        create_case.create_case_save_case("name before", "1")
+        time.sleep(4)
+        create_case.open_created_case()
+        create_case.create_case_save_case("name after", "1")
+        alerts = Alert(driver)
+        alert = alerts.get_alert()
+        assert alert == "Case updated"
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_case_deleted_alert(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH', "101", FILE[0])
+        create_case.add_witness()
+        create_case.create_case_save_case("name before", "1")
+        time.sleep(4)
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+        alerts = Alert(driver)
+        alert = alerts.get_alert()
+        assert alert == "Case deleted"
+
+    def test_case_closed_alert(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH', "101", FILE[0])
+        create_case.add_witness()
+        create_case.create_case_save_case("case closed alert", "1")
+        time.sleep(4)
+        create_case.click_on_case()
+        create_case.click_on_close_open_admin_button()
+        alerts = Alert(driver)
+        alert = alerts.get_alert()
+        assert alert == "Case closed"
+        alerts.refresh_page()
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_case_opened_alert(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('full seed ETH', "101", FILE[0])
+        create_case.add_witness()
+        create_case.create_case_save_case("case opened alert", "1")
+
+        create_case.click_on_case()
+        create_case.click_on_close_open_admin_button()
+        time.sleep(4)
+        create_case.click_on_close_open_admin_button()
+        alerts = Alert(driver)
+        alert = alerts.get_alert()
+        assert alert == "Case opened"
+        alerts.refresh_page()
+
+        delete = DeletePage(driver)
+        delete.delete_case()
+

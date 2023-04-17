@@ -12,3 +12,4 @@ class DeletePage(NextPage):
         self.element_is_visible(DashboardPageLocators.HOME_BUTTON).click()
         self.elements_are_visible(DashboardPageLocators.CASE)[0].click()
         self.elements_are_visible(DashboardPageLocators.ADMINISTRATION_BUTTONS)[1].click()
+        time.sleep(1)
