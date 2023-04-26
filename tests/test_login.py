@@ -14,7 +14,7 @@ class TestLoginTests:
     def test_login_with_valid_data(self, driver):
         login = LoginPage(driver, URL)
         login.open()
-        login.log_in("alex+i@zpoken.io", "12345678")
+        login.log_in("yura+i@catlabs.io", "12345678")
         time.sleep(5)
 
     def test_user_leave_login_field_empty(self, driver):
@@ -31,7 +31,34 @@ class TestLoginTests:
         login = LoginPage(driver, URL)
         login.open()
 
-        login.login_error_invalid_data("alex+i@zpoken.i", "12345678")
+        login.login_error_invalid_data("yura+i@catlabs.i", "12345678")
+        login_error_empty_field = login.get_error()
+        assert login_error_empty_field[0].text == "Invalid email address"
+        assert login_error_empty_field[1].text == "Invalid password"
+
+    def test_user_fill_invalid_email_without_domain(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+
+        login.login_error_invalid_data("yura+i", "12345678")
+        login_error_empty_field = login.get_error()
+        assert login_error_empty_field[0].text == "Invalid email address"
+        assert login_error_empty_field[1].text == "Invalid password"
+
+    def test_user_fill_invalid_email_without_ad(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+
+        login.login_error_invalid_data("yura+i.zpoken.io", "12345678")
+        login_error_empty_field = login.get_error()
+        assert login_error_empty_field[0].text == "Invalid email address"
+        assert login_error_empty_field[1].text == "Invalid password"
+
+    def test_user_fill_invalid_email_with_space(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+
+        login.login_error_invalid_data("yura+i@ zpoken.io", "12345678")
         login_error_empty_field = login.get_error()
         assert login_error_empty_field[0].text == "Invalid email address"
         assert login_error_empty_field[1].text == "Invalid password"
@@ -40,7 +67,7 @@ class TestLoginTests:
         login = LoginPage(driver, URL)
         login.open()
 
-        login.login_error_invalid_data("alex+i@zpoken.io", "1234567")
+        login.login_error_invalid_data("yura+i@catlabs.io", "1234567")
         login_error_empty_field = login.get_error()
         assert login_error_empty_field[0].text == "Invalid email address"
         assert login_error_empty_field[1].text == "Invalid password"

@@ -1,8 +1,10 @@
 import time
 from pages.base_page import NextPage
 from locators.dashboard_page import DashboardPageLocators as dash_locators
+from locators.dashboard_page import DashboardInCaseLocators
 from locators.open_case import CasePageLocators as case_locators
 from locators.new_case import NewCasePageLocators
+from locators.domains import Domains
 
 
 class OpenCase(NextPage):
@@ -22,10 +24,26 @@ class OpenCase(NextPage):
         self.element_is_visible(case_locators.PIN_INPUT).send_keys('424242')
         self.element_is_visible(case_locators.OPEN_CASE_WITNESS_BUTTON).click()
 
+    def get_case_information(self):
+        case_information = self.elements_are_visible(DashboardInCaseLocators.CASE_INFORMATION_COUNTERS)
+        files = case_information[0]
+        artifacts = case_information[1]
+        seed_phrase = case_information[2]
+        wallet_address = case_information[3]
+        app = case_information[4]
+        domains = case_information[5]
+        usb_devices = case_information[6]
+
+        return files, artifacts, seed_phrase, wallet_address, app, domains, usb_devices
+
     def open_artifact(self, side_menu_button):
         self.elements_are_visible(case_locators.ARTIFACTS_SOURCE_BUTTONS)[side_menu_button].click()
         self.element_is_visible(case_locators.ARTIFACT_IN_CASE).click()
         self.element_is_visible(case_locators.PARSE_WALLET_BUTTON).click()
+
+    def open_artifact_without_parse(self, side_menu_button):
+        self.elements_are_visible(case_locators.ARTIFACTS_SOURCE_BUTTONS)[side_menu_button].click()
+        self.element_is_visible(case_locators.ARTIFACT_IN_CASE).click()
 
     def check_parse_result_seed(self):
         data = self.elements_are_present(case_locators.DATA_IN_ARTIFACT)
@@ -47,4 +65,7 @@ class OpenCase(NextPage):
 
     def check_presents_of_domains(self):
         self.elements_are_present(case_locators.ARTIFACTS_SOURCE_BUTTONS)[4].click()
-        self.go_to_element("//div[@title='http://otnolatrnup.com/hideref.engine?d=https%3a%2f%2fbinomo.com%3fa%3dc565278f3597%26ac%3d101_Q42022']")
+        self.element_is_present(Domains.SAFARI_DOMAINS[0])
+        self.element_is_present(Domains.SAFARI_DOMAINS[1])
+
+

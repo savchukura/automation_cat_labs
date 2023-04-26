@@ -1,36 +1,54 @@
-from selenium import webdriver
 import time
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from locators.Main_Page import MainPageLocators as locators
+
 from URL.url import *
 from pages.delete_page import DeletePage
 from pages.new_case_page import CreatePage
 from pages.check_result import ResultPage
 from pages.login_page import LoginPage
+from pages.email_page import GetWitnessCode
+from pages.open_case import OpenCase
 from configurate import *
 import os
 
-CASE_NAME = "test usb"
-FILE = os.path.abspath("../tests/USBSTOR.reg"),
-FILE_TWO = "../tests/USBSTOR.reg"
-BROWSER_UPLOAD = 4
 
-class Test_USB_case:
+FILE =[os.path.abspath("../tests/files/USBSTOR.reg"),
+       os.path.abspath("../tests/files/2_USB.zip")]
 
-    def test_identify_usb_file(self, driver):
+
+class TestUSBCase:
+
+    def test_1_identify_usb_file(self, driver):
         login = LoginPage(driver, URL)
         login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
 
-        new_case = CreatePage(driver)
-        new_case.create_case(CASE_NAME, FILE, BROWSER_UPLOAD)
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('USB file .reg', "101", FILE[0])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('USB file .reg', "101")
 
-        check_result = ResultPage(driver)
-        check_result.check_usb_history_result()
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact_without_parse(2)
 
-        delete_case = DeletePage(driver)
-        delete_case.delete_case()
+        delete = DeletePage(driver)
+        delete.delete_case()
+
+    def test_2_identify_two_usb_file(self, driver):
+        login = LoginPage(driver, URL)
+        login.open()
+        login.log_in("yura+i@catlabs.io", "12345678")
+
+        create_case = CreatePage(driver)
+        create_case.open_case_from_main_page()
+        create_case.create_exhibit('USB file .reg', "101", FILE[1])
+        create_case.add_witness()
+        create_case.create_case_find_crypto('USB file .reg', "101")
+
+        open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
+        open_case.open_artifact_without_parse(2)
+
+        delete = DeletePage(driver)
+        delete.delete_case()

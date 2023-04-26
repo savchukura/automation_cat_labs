@@ -39,8 +39,6 @@ class CreatePage(NextPage):
         self.element_is_visible(new_case_locators.CASE_NAME_INPUT).send_keys(case_name)
         self.element_is_visible(new_case_locators.CASE_NUMBER_INPUT).send_keys(case_number)
         self.element_is_visible(new_case_locators.FIND_CRYPTO_BUTTON).click()
-        #scan_progres = self.element_is_visible(case_locators.SCANNING_PROGRESS).text
-        #assert scan_progres == 'Scanning in progress'
 
     def create_case_save_case(self, case_name, case_number):
         self.element_is_visible(new_case_locators.CASE_NAME_INPUT).send_keys(case_name)

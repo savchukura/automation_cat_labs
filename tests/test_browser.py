@@ -25,12 +25,16 @@ class TestCreateBrowserCase:
         create_case = CreatePage(driver)
         create_case.open_case_from_main_page()
         create_case.create_exhibit('Safari Domains', "101", FILE)
-        time.sleep(50)
+        time.sleep(10)
         create_case.add_witness()
         create_case.create_case_find_crypto('Safari Domains', "101")
+        time.sleep(60)
 
         open_case = OpenCase(driver)
+        open_case.open_case_with_witness()
         open_case.check_presents_of_domains()
+
+        time.sleep(3)
 
         delete = DeletePage(driver)
         delete.delete_case()

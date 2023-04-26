@@ -26,3 +26,10 @@ class DashboardPageLocators:
         By.XPATH, "//button[@class='style_btn__hsBKJ style_primary-outline__8tDXS style_small__Ps3pP']")
 
     CASE_INFORMATION = (By.XPATH, "//div[@class='style_column__wMKeM']")
+
+
+class DashboardInCaseLocators:
+
+    CASE_INFORMATION_COUNTERS = (By.XPATH, "//div[@class='small-text']")
+
+    TOTAL_BALANCE_PER_CHAIN = (By.XPATH, "//div[@class='style_infoDetails__JsP5m']")

@@ -1,5 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class BasePage:
@@ -57,7 +59,7 @@ class NextPage:
         return WebDriverWait(self.driver, timeout).until(ec.element_to_be_clickable(locator))
 
     def go_to_element(self, element):
-        self.driver.execute_script("argument[0].scrollIntoView();", element)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     def scroll(self):
         self.driver.execute_script("window.scrollTo(0,1800)")
